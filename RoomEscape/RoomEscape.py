@@ -16,10 +16,20 @@ flowerpot = Object('images/화분.png')
 flowerpot.locate(scene1, 550, 150)
 flowerpot.show()
 
+# 룸2
+scene2 = Scene('룸2', 'images/배경-2.png')
+
+door2 = Object('images/문-왼쪽-열림.png')
+door2.locate(scene2, 320, 270)  # 위치 조절
+door2.show()
+
+door3 = Object('images/문-오른쪽-닫힘.png')
+door3.locate(scene2, 900, 270)  # 위치 조절
+door3.show()
+
 # 마우스 클릭 이벤트
 door1.closed = True;
 def door1_onMouseAction(x, y, action):
-
     if door1.closed:
         if key.inHand(): 
             door1.setImage('images/문-오른쪽-열림.png')
@@ -27,7 +37,8 @@ def door1_onMouseAction(x, y, action):
         else:
             showMessage('열쇠가 필요합니다.')
     else:
-        endGame()   # 종료 함수
+        scene2.enter()
+        # endGame()   # 종료 함수
 door1.onMouseAction = door1_onMouseAction
 
 def key_onMouseAction(x, y, action):
@@ -50,5 +61,18 @@ def flowerpot_onMouseAction(x, y, action):
             flowerpot.locate(scene1, 450, 200)
             flowerpot.moved = True
 flowerpot.onMouseAction = flowerpot_onMouseAction
+
+def door2_onMouseAction(x, y, action):
+    scene1.enter()
+door2.onMouseAction = door2_onMouseAction
+
+door3.closed = True;
+def door3_onMouseAction(x, y, action):
+    if door3.closed:
+        door3.setImage('images/문-오른쪽-열림.png')
+        door3.closed = False
+    else:
+        endGame()   # 종료 함수
+door3.onMouseAction = door3_onMouseAction
 
 startGame(scene1)

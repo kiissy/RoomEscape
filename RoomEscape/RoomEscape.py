@@ -27,6 +27,10 @@ door3 = Object('images/문-오른쪽-닫힘.png')
 door3.locate(scene2, 900, 270)  # 위치 조절
 door3.show()
 
+keypad = Object('images/키패드.png')
+keypad.locate(scene2, 885, 420)
+keypad.show()
+
 # 마우스 클릭 이벤트
 door1.closed = True;
 def door1_onMouseAction(x, y, action):
@@ -66,13 +70,25 @@ def door2_onMouseAction(x, y, action):
     scene1.enter()
 door2.onMouseAction = door2_onMouseAction
 
-door3.closed = True;
+door3.locked = True
+door3.closed = True
 def door3_onMouseAction(x, y, action):
-    if door3.closed:
+    if door3.locked:
+        showMessage('문이 잠겨 있습니다.')
+    elif door3.closed:
         door3.setImage('images/문-오른쪽-열림.png')
         door3.closed = False
     else:
         endGame()   # 종료 함수
 door3.onMouseAction = door3_onMouseAction
+
+def door3_onKeypad():
+    door3.locked = False
+    showMessage('문이 열렸습니다.')
+door3.onKeypad = door3_onKeypad
+
+def keypad_onMouseAction(x, y, action):
+    showKeypad('BANGTAL', door3)
+keypad.onMouseAction = keypad_onMouseAction
 
 startGame(scene1)

@@ -31,6 +31,13 @@ keypad = Object('images/키패드.png')
 keypad.locate(scene2, 885, 420)
 keypad.show()
 
+switch = Object('images/스위치.png')
+switch.locate(scene2, 880, 440)
+switch.show()
+
+password = Object('images/암호.png')
+password.locate(scene2, 400, 100)
+
 # 마우스 클릭 이벤트
 door1.closed = True;
 def door1_onMouseAction(x, y, action):
@@ -90,5 +97,16 @@ door3.onKeypad = door3_onKeypad
 def keypad_onMouseAction(x, y, action):
     showKeypad('BANGTAL', door3)
 keypad.onMouseAction = keypad_onMouseAction
+
+switch.lighted = True
+def switch_onMouseAction(x, y, action):
+    switch.lighted = not switch.lighted
+    if switch.lighted:
+        scene2.setLight(1)
+        password.hide()
+    else:
+        scene2.setLight(0.2)
+        password.show()
+switch.onMouseAction = switch_onMouseAction
 
 startGame(scene1)

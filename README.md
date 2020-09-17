@@ -2,6 +2,7 @@
 중앙대학교 오픈소스SW와 파이썬 프로그래밍 강의 실습 과제
 
 환경 : python 3.7.0
+
 사용 라이브러리 : [bangtal](https://cafe.naver.com/bangtal)
 
 게임 소개
